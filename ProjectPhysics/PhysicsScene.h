@@ -16,11 +16,11 @@ public:
 	void update(float deltaTime);
 	void draw();
 
-	void setGravity(const glm::vec2 gravity);
-	glm::vec2 getGravity() const (return m_gravity;)
+	void setGravity(const glm::vec2 gravity) { m_gravity = gravity; }
+	glm::vec2 getGravity() const { return m_gravity; }
 
-	void setTimeStep(const float timeStep);
-	float getTimeStep() const;
+	void setTimeStep(const float timeStep) { m_timeStep = timeStep; }
+	float getTimeStep() const { return m_timeStep; }
 
 private:
 	glm::vec2 m_gravity;
