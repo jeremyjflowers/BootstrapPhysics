@@ -1,4 +1,5 @@
 #include "PhysicGame.h"
+#include "Sphere.h"
 #include "Input.h"
 #include "Font.h"
 #include "Gizmos.h"
@@ -9,11 +10,15 @@ bool PhysicGame::startup()
 	aie::Gizmos::create(255U, 255U, 65535U, 65535U);
 
 	m_renderer = new aie::Renderer2D();
-	setBackgroundColour(0.3f, 0.0f, 0.5f, 0.0f);
+	setBackgroundColour(0.2f, 0.0f, 0.3f, 1.0f);
+	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
 
 	m_scene = new PhysicsScene();
 	m_scene->setTimeStep(0.01f);
-	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
+	m_scene->setGravity({ 0.0f, 0.0f });
+
+	Sphere* ball = new Sphere(glm::vec2(), glm::vec2(), 1, 10, glm::vec4(0.0f, 0.9f, 0.8f, 1.0f));
+	m_scene->addActor(ball);
 
 	return true;
 }
@@ -31,6 +36,8 @@ void PhysicGame::update(float deltaTime)
 	aie::Input* input = aie::Input::getInstance();
 
 	aie::Gizmos::clear();
+
+	m_scene->update(deltaTime);
 
 	//Exit on Esc
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
