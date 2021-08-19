@@ -17,7 +17,7 @@ public:
 	void draw();
 
 	void setGravity(const glm::vec2 gravity);
-	glm::vec2 getGravity() const;
+	glm::vec2 getGravity() const (return m_gravity;)
 
 	void setTimeStep(const float timeStep);
 	float getTimeStep() const;
