@@ -22,6 +22,14 @@ void PhysicsScene::removeActor(PhysicsObject* actor)
 	m_actors.erase(actor);
 }
 
+typedef bool(*collisionCheck)(PhysicsObject*, PhysicsObject*);
+
+static collisionCheck collisionFunctionArray[] = {
+	PhysicsScene::planeToPlane, PhysicsScene::planeToSphere, PhysicsScene::planeToBox,
+	PhysicsScene::spheretoPlane, PhysicsScene::sphereToSphere, PhysicsScene::sphereToBox,
+	PhysicsScene::boxToPlane, PhysicsScene::boxToSphere, PhysicsScene::boxToBox
+};
+
 void PhysicsScene::update(float deltaTime)
 {
 	static float accumulatedTime = 0.0f;
@@ -51,9 +59,19 @@ void PhysicsScene::update(float deltaTime)
 				PhysicsObject* object1 = *outer;
 				PhysicsObject* object2 = *inner;
 
-				//Collision check
-				spheretoPlane(object1, object2);
-				planeToSphere(object1, object2);
+				//Gets the shape IDs
+				int shape1 = (int)(object1->getShapeID());
+				int shape2 = (int)(object2->getShapeID());
+
+				//Finds the index using i = (y * w) + x
+				int i = (shape1 * (int)ShapeType::LENGTH) + shape2;
+
+				//Retrieves and calls the collision check from the array
+				collisionCheck collisionFn = collisionFunctionArray[i];
+				if (collisionFn)
+				{
+					collisionFn(object1, object2);
+				}
 			}
 		}
 	}

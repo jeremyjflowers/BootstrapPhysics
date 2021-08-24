@@ -15,7 +15,7 @@ bool PhysicGame::startup()
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
 
 	m_scene = new PhysicsScene();
-	m_scene->setTimeStep(0.01f);
+	m_scene->setTimeStep(0.001f);
 	m_scene->setGravity({ 1.0f, 0.0f });
 
 	Sphere* ball = new Sphere(glm::vec2(-20, 10), glm::vec2(), 1, 6, glm::vec4(0.0f, 1.0f, 1.0f, 1.0f));
@@ -24,7 +24,7 @@ bool PhysicGame::startup()
 	Sphere* orb = new Sphere(glm::vec2(20, 10), glm::vec2(), 1, 6, glm::vec4(0.2f, 0.0f, 0.3f, 1.0f));
 	m_scene->addActor(orb);
 
-	Plane* surface = new Plane(glm::vec2(-1.0f, 0.0f), -20.0f, glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
+	Plane* surface = new Plane(glm::vec2(-3.0f, 0.0f), -20.0f, glm::vec4(1.0f, 1.0f, 0.0f, 1.0f));
 	m_scene->addActor(surface);
 
 	return true;
