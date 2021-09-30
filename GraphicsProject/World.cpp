@@ -19,6 +19,7 @@ void World::update()
 
 void World::draw()
 {
+	m_quad.draw();
 }
 
 void World::end()

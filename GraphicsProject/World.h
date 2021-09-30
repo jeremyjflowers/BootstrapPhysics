@@ -5,6 +5,7 @@
 class World
 {
 public:
+	World();
 	World(int width, int height);
 	~World() {}
 

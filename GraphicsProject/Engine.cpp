@@ -104,9 +104,10 @@ int Engine::draw()
 
 	m_shader.bind();
 
-	glm::mat4 projectionViewModel = m_projectionMatrix * m_veiwMatrix * m_quad.getTransform();
+	glm::mat4 projectionViewModel = m_world.getProjectionViewModel();
+	m_shader.bindUniform("projectionViewModel", projectionViewModel);
 
-	m_quad.draw();
+	m_world.draw();
 
 	return 0;
 }
