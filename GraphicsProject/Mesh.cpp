@@ -30,20 +30,14 @@ void Mesh::start()
 	glGenBuffers(1, &m_vertexBufferObject);
 	glGenVertexArrays(1, &m_vertexArrayObject);
 
+	//Generate the vertices
+	Vertex* vertices{};
+	int vertexCount;
+	generateVertices(vertices, vertexCount);
+
 	//Bind vertex array and vertex buffers
 	glBindVertexArray(m_vertexArrayObject);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBufferObject);
-
-	//Define the vertices for a quad
-	Vertex vertices[6];
-	//Triangle 0
-	vertices[0].position = { -0.5f, 0.0f, 0.5f, 1.0f };
-	vertices[1].position = { 0.5f, 0.0f, 0.5f, 1.0f };
-	vertices[2].position = { -0.5f, 0.0f, -0.5f, 1.0f };
-	//Triangle 1
-	vertices[3].position = { 0.5f, 0.0f, 0.5f, 1.0f };
-	vertices[4].position = { -0.5f, 0.0f, -0.5f, 1.0f };
-	vertices[5].position = { 0.5f, 0.0f, 0.5f, 1.0f };
 
 	//Fill vertex buffer
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * 6, vertices, GL_STATIC_DRAW);
@@ -61,4 +55,22 @@ void Mesh::draw()
 {
 	glBindVertexArray(m_vertexArrayObject);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
+}
+
+void Mesh::generateVertices(Vertex* vertices, int& vertexCount)
+{
+	vertexCount = 6;
+
+
+	//Define the vertices for a quad
+	vertices = new Vertex[vertexCount];
+
+	//Triangle 0
+	vertices[0].position = { -0.5f, 0.0f, 0.5f, 1.0f };
+	vertices[1].position = { 0.5f, 0.0f, 0.5f, 1.0f };
+	vertices[2].position = { -0.5f, 0.0f, -0.5f, 1.0f };
+	//Triangle 1
+	vertices[3].position = { 0.5f, 0.0f, 0.5f, 1.0f };
+	vertices[4].position = { -0.5f, 0.0f, -0.5f, 1.0f };
+	vertices[5].position = { 0.5f, 0.0f, 0.5f, 1.0f };
 }
