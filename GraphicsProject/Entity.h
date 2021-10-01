@@ -5,8 +5,10 @@ class Entity
 {
 public:
 	Entity();
-	Entity(int entities);
 	~Entity();
+
+	void AddEntity();
+	void DeleteEntity();
 
 	void start();
 	void update();
@@ -14,7 +16,8 @@ public:
 	void end();
 
 private:
-	int m_entities;
-	glm::mat4 entitiesArray = 
+	Entity* m_entity;
+	Entity* m_entities;
+
 };
 

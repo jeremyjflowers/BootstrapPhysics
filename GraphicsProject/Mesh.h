@@ -2,6 +2,7 @@
 #include "gl_core_4_4.h"
 #include "glm/vec4.hpp"
 #include "glm\mat4x4.hpp"
+#include <winnt.h>
 
 class Mesh
 {
@@ -18,7 +19,7 @@ public:
 	void start();
 	void draw();
 
-	void generateVertices(Vertex* vertices, int& vertexCount);
+	virtual Vertex* generateVertices(unsigned int& vertexCount, unsigned int& triCount) = 0;
 
 	glm::mat4 getTransform() { return m_transform; }
 	void setTransform(glm::mat4 transform);

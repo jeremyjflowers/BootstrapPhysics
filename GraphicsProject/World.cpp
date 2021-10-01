@@ -10,7 +10,8 @@ World::World(int width, int height)
 
 void World::start()
 {
-
+	//Initialize the quad
+	m_quad.setTransform(glm::mat4(10.0f));
 }
 
 void World::update()

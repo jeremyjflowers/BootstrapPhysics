@@ -1,13 +1,16 @@
 #include "Entity.h"
-#include "Mesh.h"
 
 Entity::Entity()
 {
+
 }
 
-Entity::Entity(int entities)
+void Entity::AddEntity()
 {
-	m_entities = entities;
+}
+
+void Entity::DeleteEntity()
+{
 }
 
 void Entity::start()
