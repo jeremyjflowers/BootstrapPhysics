@@ -92,7 +92,7 @@ bool PhysicsScene::planeToPlane(PhysicsObject* object1, PhysicsObject* object2)
 
 bool PhysicsScene::planeToSphere(PhysicsObject* object1, PhysicsObject* object2)
 {
-	return spheretoPlane(object1, object2);
+	return spheretoPlane(object2, object1);
 }
 
 bool PhysicsScene::planeToBox(PhysicsObject* object1, PhysicsObject* object2)
@@ -127,6 +127,20 @@ bool PhysicsScene::sphereToSphere(PhysicsObject* object1, PhysicsObject* object2
 {
 	Sphere* sphere1 = dynamic_cast<Sphere*>(object1);
 	Sphere* sphere2 = dynamic_cast<Sphere*>(object2);
+
+	if (sphere1 && sphere2)
+	{
+		glm::vec2 position1 = sphere1->getPosition();
+		glm::vec2 position2 = sphere2->getPosition();
+		glm::vec2 distanceVec = position1 - position2;
+		float distance = glm::sqrt(distanceVec.x * distanceVec.x + distanceVec.y * distanceVec.y);
+
+		if (glm::abs(distance) < sphere1->getRadius() + sphere2->getRadius())
+		{
+			sphere1->resolveCollision(sphere2);
+			return true;
+		}
+	}
 
 	return false;
 }
